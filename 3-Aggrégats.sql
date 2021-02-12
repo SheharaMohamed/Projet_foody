@@ -49,7 +49,7 @@ SELECT NoFour,COUNT(Refprod) AS NbProd FROM produit GROUP BY NoFour HAVING COUNT
 SELECT CodeCateg,ROUND(AVG(PrixUnit),2) AS AvgPrix FROM produit GROUP BY CodeCateg HAVING AVG(PrixUnit)>50;
 SELECT NoFour,COUNT(DISTINCT CodeCateg) NbCat FROM produit GROUP BY NoFour HAVING COUNT(DISTINCT CodeCateg)=1;
 SELECT Refprod,MAX(PrixUnit) AS ProdCher FROM produit GROUP BY NoFour HAVING MAX(PrixUnit)>50;
-
+SELECT Refprod, PrixUnit FROM produit WHERE PrixUnit>50 AND Nofour IN (SELECT NoFour FROM produit GROUP BY NoFour);
 /*
 Bonus :
 1.Donner la quantité totale commandée par les clients, pour chaque produit
