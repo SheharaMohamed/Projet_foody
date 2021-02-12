@@ -27,8 +27,10 @@ SELECT NoFour,Societe,Ville,Pays FROM fournisseur f WHERE EXISTS
 
 SELECT NoFour,Societe,Ville,Pays FROM fournisseur f WHERE EXISTS
 	(SELECT * FROM produit p WHERE f.NoFour=p.NoFour AND 
-		CodeCateg=(SELECT CodeCateg FROM categorie WHERE NomCateg='Drinks'));
-
+		CodeCateg=(SELECT CodeCateg FROM categorie WHERE NomCateg='Drinks'))
+	AND NOT EXISTS 
+    (SELECT * FROM produit p WHERE f.NoFour=p.NoFour AND 
+		CodeCateg IN (SELECT CodeCateg FROM categorie WHERE NomCateg!='Drinks'));
 /*
 Bonus :
 1.Lister les clients qui ont commandé du "Camembert Pierrot" (sans aucune jointure)
